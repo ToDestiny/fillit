@@ -23,15 +23,15 @@ CFLAGS = -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) :
-	make -C libft
-	$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(HEADER)
+	@$ make -C libft
+	@$ $(CC) $(CFLAGS) -o $(NAME) $(SRC) $(HEADER)
 
 clean :
-	make -C libft clean
-	/bin/rm -rf $(OBJ)
+	@$ make -C libft clean
+	@$ /bin/rm -rf $(OBJ)
 
 fclean : clean
-	make -C libft fclean
-	/bin/rm -rf $(NAME)
+	@$ make -C libft fclean
+	@$ /bin/rm -rf $(NAME)
 
 re : fclean all
