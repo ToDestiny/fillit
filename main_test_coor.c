@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_valid_tetra.c                                   :+:      :+:    :+:   */
+/*   main_test_coor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/15 12:10:57 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/30 16:38:32 by acolas           ###   ########.fr       */
+/*   Created: 2017/05/23 16:38:17 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/23 19:14:44 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libfil.h"
-#define BUFF_SIZE 1
+#include <stdio.h>
+#include "txt.h"
 
-int		ft_tetra_nb_char(char *file)
+int		main(void)
 {
-	int		fd;
-	char	buff[546];
-	int		ret;
-	int		n;
+	int		i;
+	int		**tab;
+	char	*str = "...#\n..##\n...#\n.#..\n\n";
 
-	n = 20;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (0);
-	ret = 0;
-	while (read(fd, buff, BUFF_SIZE) != 0)
-		ret++;
-	while (n < ret && n < 545)
-		n = n + 21;
-	if (n == ret)
+	printf("%s\n", str);
+	i = 0;
+	printf("Debug: %d\n", i);
+	tab = ft_coor_tetra(ft_row_tetra(str));
+	printf("debug 2");
+	while (i < 4)
 	{
-		return (n);
+		printf("tetra %d est [%d ;", (i + 1), tab[i][0]);
+		printf(" %d]\n", tab[i][1]);
+		i++;
 	}
-	else
-	{
-		return (0);
-	}
-	close(fd);
+	return(0);
 }

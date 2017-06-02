@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_valid_tetra.c                                   :+:      :+:    :+:   */
+/*   ft_rm_tetra.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/15 12:10:57 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/30 16:38:32 by acolas           ###   ########.fr       */
+/*   Created: 2017/05/30 17:38:22 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/30 18:12:12 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libfil.h"
-#define BUFF_SIZE 1
-
-int		ft_tetra_nb_char(char *file)
+char	**ft_rm_tetra(char **square, int **tetra, int row, int col)
 {
-	int		fd;
-	char	buff[546];
-	int		ret;
-	int		n;
+	int		i;
 
-	n = 20;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (0);
-	ret = 0;
-	while (read(fd, buff, BUFF_SIZE) != 0)
-		ret++;
-	while (n < ret && n < 545)
-		n = n + 21;
-	if (n == ret)
+	i = 0;
+	while (i < 4)
 	{
-		return (n);
+		square[col + tetra[i][0]][row + tetra[0][1]] = '.';
+		i++;
 	}
-	else
-	{
-		return (0);
-	}
-	close(fd);
+	return (square);
 }

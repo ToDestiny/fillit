@@ -1,41 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_valid_tetra.c                                   :+:      :+:    :+:   */
+/*   ft_square.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/15 12:10:57 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/30 16:38:32 by acolas           ###   ########.fr       */
+/*   Created: 2017/05/23 14:07:05 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/30 16:36:54 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfil.h"
-#define BUFF_SIZE 1
 
-int		ft_tetra_nb_char(char *file)
+char	**ft_new_square(int n)
 {
-	int		fd;
-	char	buff[546];
-	int		ret;
-	int		n;
+	char	**tab;
+	int		i;
+	int		j;
 
-	n = 20;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	if (!(tab = (char**)malloc(sizeof(char *) * n)))
 		return (0);
-	ret = 0;
-	while (read(fd, buff, BUFF_SIZE) != 0)
-		ret++;
-	while (n < ret && n < 545)
-		n = n + 21;
-	if (n == ret)
+	i = 0;
+	while (i < n)
 	{
-		return (n);
+		if (!(tab[i] = (char*)malloc(sizeof(char) * n + 2)))
+			return (0);
+		j = 0;
+		while (j < n)
+		{
+			tab[i][j] = '.';
+			j++;
+		}
+		tab[i][j] = '\n';
+		j++;
+		tab[i][j] = '0';
+		i++;
 	}
-	else
-	{
-		return (0);
-	}
-	close(fd);
+	return (tab);
 }
