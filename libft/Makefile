@@ -6,7 +6,7 @@
 #    By: llorgere <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/12 14:11:34 by llorgere          #+#    #+#              #
-#    Updated: 2017/05/08 18:59:57 by llorgere         ###   ########.fr        #
+#    Updated: 2017/05/30 14:55:25 by llorgere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ SRC = ft_memset.c \
 OBJ = $(SRC:.c=.o)
 CC = gcc
 CFLAGS =
-.PHONY = all clean fclean re
+.PHONY : all clean fclean re
 
 all : $(NAME)
 
