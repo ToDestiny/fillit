@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_check_tetra.c                                   :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:13:51 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/30 16:01:22 by acolas           ###   ########.fr       */
+/*   Updated: 2017/06/02 16:03:26 by acolas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_tetra_check(char *tetra, int i, int l)
 	if (tetra[i + 5] == '#')
 		la++;
 	if (la == 0)
-		return (0);
+		return (9);
 	l = l + la;
 	return (l);
 }
@@ -36,21 +36,19 @@ int		ft_check_tetra(char *tetra)
 	int		i;
 	int		l;
 	int		j;
-	int		diese;
 
 	i = 0;
 	j = i + 4;
 	l = 0;
 	while (i <= 19)
 	{
-		diese = 0;
 		while (i < j && (tetra[i] == '.' || tetra[i] == '#'))
 		{
-			if (tetra[i] == '#' && (++diese))
+			if (tetra[i] == '#')
 				l = ft_tetra_check(tetra, i, l);
 			i++;
 		}
-		if (tetra[i] != '\n' && i != j || diese != 4)
+		if (tetra[i] != '\n' && i != j)
 			return (0);
 		i++;
 		j = i + 4;
