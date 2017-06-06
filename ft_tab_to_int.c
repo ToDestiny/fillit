@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_posi.c                                    :+:      :+:    :+:   */
+/*   ft_tab_to_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/30 13:04:51 by llorgere          #+#    #+#             */
-/*   Updated: 2017/06/06 19:00:07 by acolas           ###   ########.fr       */
+/*   Created: 2017/06/02 16:45:40 by llorgere          #+#    #+#             */
+/*   Updated: 2017/06/02 19:55:27 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libfil.h"
 #include <stdio.h>
 
-int		ft_check_posi(char **square, int **tetra, int pos, int sq_size)
+int		***ft_tab_to_int(char **tetra, int nb_tetra)
 {
 	int		i;
-	int		row;
-	int		col;
+	int		***tab;
 
+//	printf("test tab_to_int 1 \n");
+	if(!(tab = (int ***)malloc(sizeof(int **) * nb_tetra)))
+		return (NULL);
 	i = 0;
-	row = pos / sq_size;
-	col = pos % sq_size;
-	printf("row:%d, col:%D check posi\n", row, col);
-	while (i < 4)
+//	printf("test tab_to_int 2 \n");
+	while (i < nb_tetra)
 	{
-		if ((row + tetra[i][1]) < 0 || (col + tetra[i][0]) < 0
-				|| (col + tetra[i][0]) >= sq_size ||
-				(row + tetra[i][1]) >= sq_size)
-			return (0);
-		else if (square[row + tetra[i][1]][col + tetra[i][0]] != '.')
-			return (0);
+//		printf("test tab_to_int 3 du tetra %d \n", i);
+		printf("*tetra[%d] est %s",i , tetra[i]);
+		tab[i] = ft_coor_tetra(ft_row_tetra(tetra[i]));
+//		printf("test tab_to_int 4 du tetra %d \n", i);
 		i++;
 	}
-	printf("posi ok\n");
-	return (1);
+	return (tab);
 }

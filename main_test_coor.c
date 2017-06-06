@@ -17,7 +17,7 @@ int		main(void)
 {
 	int		i;
 	int		**tab;
-	char	*str = "...#\n..##\n...#\n.#..\n\n";
+	char	*str = "...#\n..##\n...#\n....\n\n";
 
 	printf("%s\n", str);
 	i = 0;
