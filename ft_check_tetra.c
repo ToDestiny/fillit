@@ -6,24 +6,24 @@
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:13:51 by llorgere          #+#    #+#             */
-/*   Updated: 2017/06/06 14:43:35 by acolas           ###   ########.fr       */
+/*   Updated: 2017/06/09 17:30:25 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfil.h"
 
-int		ft_tetra_check(char *tetra, int i, int l)
+static int		ft_tetra_check(char *tetra, int i, int l)
 {
 	int		la;
 
 	la = 0;
-	if (i > 0 && tetra[i - 1] == '#')
+	if (tetra[i - 1] == '#')
 		la++;
-	if (i < 19 && tetra[i + 1] == '#')
+	if (tetra[i + 1] == '#')
 		la++;
-	if (i > 4 && tetra[i - 5] == '#')
+	if (tetra[i - 5] == '#')
 		la++;
-	if (i < 15 && tetra[i + 5] == '#')
+	if (tetra[i + 5] == '#')
 		la++;
 	if (la == 0)
 		return (9);
@@ -31,7 +31,7 @@ int		ft_tetra_check(char *tetra, int i, int l)
 	return (l);
 }
 
-int		ft_check_tetra(char *tetra)
+int				ft_check_tetra(char *tetra)
 {
 	int		i;
 	int		l;

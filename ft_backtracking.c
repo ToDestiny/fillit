@@ -5,45 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/30 16:16:37 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/30 18:12:08 by llorgere         ###   ########.fr       */
+/*   Created: 2017/06/07 16:00:52 by llorgere          #+#    #+#             */
+/*   Updated: 2017/06/07 17:19:41 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libfil.h"
-#include "libft/libft.h"
 
-void	ft_backtracking(char **file, int nb_tetra)
+char	**ft_back_valid(t_type *test, char **sq, int ***tet, int sq_s)
 {
-	int		size_square;
-	int		**coor;
-	char 	**square;
-	int		row;
-	int		col;
-	int		tetra;
+	sq = ft_put_tetra(sq, tet[test->num_te], *test, sq_s);
+	(test->pos_tet[test->num_te]) = (test->pos);
+	(test->pos) = 0;
+	(test->num_te)++;
+	return (sq);
+}
 
-	size_square = 2;
-	while (size_square < 1000)
+char	**ft_back_invalid(t_type *test, char **sq, int sq_s, int ***tet)
+{
+	test->num_te--;
+	test->pos = test->pos_tet[test->num_te];
+	sq = ft_rm_tetra(sq, tet[test->num_te], test->pos, sq_s);
+	test->pos++;
+	return (sq);
+}
+
+int		ft_backtracking(char **sq, int sq_s, int ***tet, int nb_tet)
+{
+	t_type	test;
+
+	test.pos = 0;
+	test.num_te = 0;
+	test.pos_tet = (int*)malloc(sizeof(int) * nb_tet);
+	while (test.num_te < nb_tet)
 	{
-		square = ft_new_square(size_square);
-		row = 0
-		while (col < size_square)
+		if (ft_check_posi(sq, tet[test.num_te], test.pos, sq_s) == 1)
 		{
-			col = 0;
-			while (row < size_square)
-			{
-				tetra = 0;
-				while (tetra < nb_tetra)
-				{
-					coor = ft_coor_tetra(ft_row_tetra(file[tetra]));
-					if (ft_check_posi(square, coor, row, col, size_square) == 1)
-					{
-					}
-					tetra++;
-				}
-				row++;
-			}
-			col++;
+			sq = ft_back_valid(&(test), sq, tet, sq_s);
 		}
-		size_square++;
+		else if (ft_check_posi(sq, tet[test.num_te], test.pos, sq_s) == 0 &&
+				test.pos != (sq_s * sq_s))
+			test.pos++;
+		else if (ft_check_posi(sq, tet[test.num_te], test.pos, sq_s) == 0 &&
+				test.pos == (sq_s * sq_s))
+		{
+			if (test.num_te == 0)
+				return (-1);
+			sq = ft_back_invalid(&(test), sq, sq_s, tet);
+		}
 	}
+	return (1);
 }

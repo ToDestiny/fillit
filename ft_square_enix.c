@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_valid_tetra.c                                   :+:      :+:    :+:   */
+/*   ft_square_enix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/15 12:10:57 by llorgere          #+#    #+#             */
-/*   Updated: 2017/06/09 17:33:43 by llorgere         ###   ########.fr       */
+/*   Created: 2017/06/09 17:17:11 by llorgere          #+#    #+#             */
+/*   Updated: 2017/06/09 17:33:25 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfil.h"
-#define BUFF_SIZE 1
 
-int		ft_tetra_nb_char(char *file)
+t_type3	ft_square_enix(t_type3 s)
 {
-	int		fd;
-	char	buff[546];
-	int		ret;
-	int		n;
-
-	n = 20;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (0);
-	ret = 0;
-	while (read(fd, buff, BUFF_SIZE) != 0)
-		ret++;
-	while (n < ret && n < 545)
-		n = n + 21;
-	if (n == ret)
+	while (ft_backtracking(s.square, s.sq_s, s.coor, s.nb_tetra) != 1)
 	{
-		return (n);
+		s.sq_s++;
+		s.square = ft_new_square(s.sq_s);
 	}
-	else
-	{
-		return (0);
-	}
-	close(fd);
+	return (s);
 }
